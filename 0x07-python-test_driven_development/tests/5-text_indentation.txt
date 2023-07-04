@@ -1,0 +1,143 @@
+This module defines the function "text_indentation(text)"
+
+            Guide
+
+
+Text is printed with two new lines after each of the characters ".", "?",
+and ":".
+
+___
+
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+    >>> text_indentation("hell.")
+    hell.
+    <BLANKLINE>
+
+No spaces will be printed at the beginning of a line
+
+___
+
+    >>> text_indentation("   cool school.")
+    cool school.
+    <BLANKLINE>
+
+___
+
+    >>> text_indentation("          ")
+
+likewise, no spaces will be printed at the end of each printed line
+
+___
+
+    >>> text_indentation("hell.   ")
+    hell.
+    <BLANKLINE>
+
+___
+
+    >>> text_indentation("    a lot.    but not much.   ")
+    a lot.
+    <BLANKLINE>
+    but not much.
+    <BLANKLINE>
+
+new lines are only printed for the characters ".", ":", and "?"
+text not ending with any of these characters is not ended with a new line
+
+___
+
+    >>> text_indentation("no new lines at the end")
+    no new lines at the end
+
+new lines within a string are printed as normal
+
+___
+
+    >>> text_indentation("testing a new line\nit works")
+    testing a new line
+    <BLANKLINE>
+    it works
+
+___
+
+    >>> text_indentation("\n\n\n\n\n\n\n how about trying seven new lines")
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    We just printed three new lines
+
+___
+    >>> text_indentation("A sneaky \n new line.")
+    A sneaky 
+    new line.
+    <BLANKLINE>
+
+example of a combo:
+
+___
+
+    >>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing "
+    ... "elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas "
+    ... "commovere? Non autem hoc: igitur ne illud quidem. Fortasse id optimum, "
+    ... "sed ubi illud: Plus semper voluptatis? Teneo, inquit, finem illi videri "
+    ... "nihil dolere. Transfer idem ad modestiam vel temperantiam, quae est "
+    ... "moderatio cupiditatum rationi oboediens. Si id dicis, vicimus. Inde "
+    ... "sermone vario sex illa a Dipylo stadia confecimus. Sin aliud quid "
+    ... "voles, postea. Quae animi affectio suum cuique tribuens atque hanc, "
+    ... "quam dico. Utinam quidem dicerent alium alio beatiorem! Iam ruinas "
+    ... "videres") # doctest: +NORMALIZE_WHITESPACE
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne illud quidem.
+    <BLANKLINE>
+    Fortasse id optimum, sed ubi illud:
+    <BLANKLINE>
+    Plus semper voluptatis?
+    <BLANKLINE>
+    Teneo, inquit, finem illi videri nihil dolere.
+    <BLANKLINE>
+    Transfer idem ad modestiam vel temperantiam, 
+    quae est moderatio cupiditatum rationi oboediens.
+    <BLANKLINE>
+    Si id dicis, vicimus.
+    <BLANKLINE>
+    Inde sermone vario sex illa a Dipylo stadia confecimus.
+    <BLANKLINE>
+    Sin aliud quid voles, postea.
+    <BLANKLINE>
+    Quae animi affectio suum cuique tribuens atque hanc, quam dico.
+    <BLANKLINE>
+    Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres
+
+Invalid Text
+============
+
+"text" must be a string, or a TypeError will be raised
+
+___
+
+    >>> text_indentation(7)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+___
+
+    >>> text_indentation({"one": 1, "two": 2})
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+___
+
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
