@@ -1,0 +1,137 @@
+This modules defines a base geometry class BaseGeometry.
+
+        Instantiation
+
+"BaseGeometry" includes no attributes, so It's initialized with no arguments.
+
+___
+
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+    >>> bg = BaseGeometry()
+    >>> type(bg)
+    <class '7-base_geometry.BaseGeometry'>
+
+___
+
+    >>> print(bg) # doctest: +ELLIPSIS
+    <7-base_geometry.BaseGeometry object at ...>
+
+So, any arguments given to the instantiation results in a TypeError.
+
+___
+
+    >>> bg = BaseGeometry(None)
+    Traceback (most recent call last):
+    TypeError: object() takes no parameters
+
+            How it works
+
+"BaseGeometry" features two methods:
+    "area(self)" and "integer_validator(self, name, value)".
+"area(...)" is not yet implemented.
+
+___
+
+    >>> bg = BaseGeometry()
+    >>> print(bg.area) # doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE
+    <bound method BaseGeometry.area of <7-base_geometry.BaseGeometry 
+     object at...>>
+
+___
+
+    >>> bg.area()
+    Traceback (most recent call last):
+    Exception: area() is not implemented
+
+The second method, "integer_validator(...)", validates the integer value of a parameter.
+"name", is the name of the argument to check.
+"value", is the argument to check.
+
+___
+
+    >>> print(bg.integer_validator) # doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE
+    <bound method BaseGeometry.integer_validator of <7-base_geometry.BaseGeometry 
+    object at...>>
+
+When "value" is a valid integer, the function does nothing.
+
+___
+
+
+   >>> bg.integer_validator("valid number", 4)
+
+But, when "value" is not an integer, a "TypeError" is raised.
+
+___
+
+    >>> bg.integer_validator("invalid number", "number")
+    Traceback (most recent call last):
+    TypeError: invalid number must be an integer
+
+___
+
+    >>> bg.integer_validator("another invalid", True)
+    Traceback (most recent call last):
+    TypeError: another invalid must be an integer
+
+___
+
+    >>> bg.integer_validator("invalid tuple", (5,))
+    Traceback (most recent call last):
+    TypeError: invalid tuple must be an integer
+
+___
+
+    >>> bg.integer_validator("and another", [8])
+    Traceback (most recent call last):
+    TypeError: and another must be an integer
+
+___
+
+    >>> bg.integer_validator("more invalid testing", {8, 9})
+    Traceback (most recent call last):
+    TypeError: more invalid testing must be an integer
+
+___
+
+    >>> bg.integer_validator("absolutely every possible invalid", None)
+    Traceback (most recent call last):
+    TypeError: absolutely every possible invalid must be an int
+
+When "value" is an integer, but "value <= 0", a ValueError is raised.
+
+___
+
+    >>> bg.integer_validator("invalid int", -6)
+    Traceback (most recent call last):
+    ValueError: invalid int must be greater than 0
+
+___
+
+    >>> bg.integer_validator("invalid integer", 0)
+    Traceback (most recent call last):
+    ValueError: invalid int must be greater than 0
+
+"name" and "value" must both be provided. If not, a TypeError is raised.
+
+___
+
+    >>> bg.integer_validator() # doctest: +NORMALIZE_WHITESPACE
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 2 required positional arguments: 
+    'name' and 'value'
+
+___
+
+    >>> bg.integer_validator(None) # doctest: +NORMALIZE_WHITESPACE
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 1 required positional argument: 
+    'value'
+
+"name" is assumed to be a string, but "name" of any type will be printed.
+
+___
+
+    >>> bg.integer_validator({"v": 5}, (7, 8))
+    Traceback (most recent call last):
+    TypeError: {'v': 5} must be an integer
