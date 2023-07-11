@@ -1,137 +1,96 @@
-This modules defines a base geometry class BaseGeometry.
+First import class:
+	>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
-        Instantiation
+		Guide
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("a", 9)
 
-"BaseGeometry" includes no attributes, so It's initialized with no arguments.
+-int value "0":
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("a", 0)
+	Traceback (most recent call last):
+	...
+	ValueError: a must be greater than 0
 
-___
+-Negative int value:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("a", -5)
+	Traceback (most recent call last):
+	...
+	ValueError: a must be greater than 0
 
-    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
-    >>> bg = BaseGeometry()
-    >>> type(bg)
-    <class '7-base_geometry.BaseGeometry'>
+-Non int value:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("a", "k")
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
 
-___
+-Empty value:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator()
+	Traceback (most recent call last):
+	...
+	TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
-    >>> print(bg) # doctest: +ELLIPSIS
-    <7-base_geometry.BaseGeometry object at ...>
+-One input:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("a")
+	Traceback (most recent call last):
+	...
+	TypeError: integer_validator() missing 1 required positional argument: 'value'
 
-So, any arguments given to the instantiation results in a TypeError.
+-Input in instance constructor:
+	>>> bg = BaseGeometry("a")
+	Traceback (most recent call last):
+	...
+	TypeError: BaseGeometry() takes no arguments
 
-___
+-Not type BaseGeometry:
+	>>> bg = (1, 2)
+	>>> bg.integer_validator("a", 8)
+	Traceback (most recent call last):
+	...
+	AttributeError: 'tuple' object has no attribute 'integer_validator'
 
-    >>> bg = BaseGeometry(None)
-    Traceback (most recent call last):
-    TypeError: object() takes no parameters
+-Checks area:
+	>>> bg = BaseGeometry()
+	>>> bg.area()
+	Traceback (most recent call last):
+	...
+	Exception: area() is not implemented
 
-            How it works
+-Integer__validator with list input:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("age", [2])
+	Traceback (most recent call last):
+	...
+	TypeError: age must be an integer
 
-"BaseGeometry" features two methods:
-    "area(self)" and "integer_validator(self, name, value)".
-"area(...)" is not yet implemented.
+-Integer_validator with tuple input:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("age", (8,))
+	Traceback (most recent call last):
+	...
+	TypeError: age must be an integer
 
-___
+-Integer_validator with weird input:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("age", {7, 6})
+	Traceback (most recent call last):
+	...
+	TypeError: age must be an integer
 
-    >>> bg = BaseGeometry()
-    >>> print(bg.area) # doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE
-    <bound method BaseGeometry.area of <7-base_geometry.BaseGeometry 
-     object at...>>
+-Integer_validator with bool input:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("age", False)
+	Traceback (most recent call last):
+	...
+	TypeError: age must be an integer
 
-___
-
-    >>> bg.area()
-    Traceback (most recent call last):
-    Exception: area() is not implemented
-
-The second method, "integer_validator(...)", validates the integer value of a parameter.
-"name", is the name of the argument to check.
-"value", is the argument to check.
-
-___
-
-    >>> print(bg.integer_validator) # doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE
-    <bound method BaseGeometry.integer_validator of <7-base_geometry.BaseGeometry 
-    object at...>>
-
-When "value" is a valid integer, the function does nothing.
-
-___
-
-
-   >>> bg.integer_validator("valid number", 4)
-
-But, when "value" is not an integer, a "TypeError" is raised.
-
-___
-
-    >>> bg.integer_validator("invalid number", "number")
-    Traceback (most recent call last):
-    TypeError: invalid number must be an integer
-
-___
-
-    >>> bg.integer_validator("another invalid", True)
-    Traceback (most recent call last):
-    TypeError: another invalid must be an integer
-
-___
-
-    >>> bg.integer_validator("invalid tuple", (5,))
-    Traceback (most recent call last):
-    TypeError: invalid tuple must be an integer
-
-___
-
-    >>> bg.integer_validator("and another", [8])
-    Traceback (most recent call last):
-    TypeError: and another must be an integer
-
-___
-
-    >>> bg.integer_validator("more invalid testing", {8, 9})
-    Traceback (most recent call last):
-    TypeError: more invalid testing must be an integer
-
-___
-
-    >>> bg.integer_validator("absolutely every possible invalid", None)
-    Traceback (most recent call last):
-    TypeError: absolutely every possible invalid must be an int
-
-When "value" is an integer, but "value <= 0", a ValueError is raised.
-
-___
-
-    >>> bg.integer_validator("invalid int", -6)
-    Traceback (most recent call last):
-    ValueError: invalid int must be greater than 0
-
-___
-
-    >>> bg.integer_validator("invalid integer", 0)
-    Traceback (most recent call last):
-    ValueError: invalid int must be greater than 0
-
-"name" and "value" must both be provided. If not, a TypeError is raised.
-
-___
-
-    >>> bg.integer_validator() # doctest: +NORMALIZE_WHITESPACE
-    Traceback (most recent call last):
-    TypeError: integer_validator() missing 2 required positional arguments: 
-    'name' and 'value'
-
-___
-
-    >>> bg.integer_validator(None) # doctest: +NORMALIZE_WHITESPACE
-    Traceback (most recent call last):
-    TypeError: integer_validator() missing 1 required positional argument: 
-    'value'
-
-"name" is assumed to be a string, but "name" of any type will be printed.
-
-___
-
-    >>> bg.integer_validator({"v": 5}, (7, 8))
-    Traceback (most recent call last):
-    TypeError: {'v': 5} must be an integer
+-Int_validator with None input:
+	>>> bg = BaseGeometry()
+	>>> bg.integer_validator("age", None)
+	Traceback (most recent call last):
+	...
+	TypeError: age must be an integer
