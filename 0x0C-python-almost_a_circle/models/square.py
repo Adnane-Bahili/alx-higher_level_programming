@@ -26,7 +26,7 @@ class Square(Rectangle):
         self.width = value
         self.height = value
 
-    def update(self, *args, **kw_args):
+    def update(self, *args, **kwargs):
         """updates the Square
         arguments:
             *args (ints): New attribute values
@@ -34,7 +34,7 @@ class Square(Rectangle):
                 - 2nd argument representing size attribute
                 - 3rd argument representing x attribute
                 - 4th argument representing y attribute
-            **kw_args (dict): New key/value  attributes pairs
+            **kwargs (dict): New key/value  attributes pairs
         """
         if args and len(args) != 0:
             i = 0
@@ -52,8 +52,8 @@ class Square(Rectangle):
                     self.y = arg
                 i += 1
 
-        elif kw_args and len(kw_args) != 0:
-            for k, v in kw_args.items():
+        elif kwargs and len(kwargs) != 0:
+            for k, v in kwargs.items():
                 if k == "id":
                     if v is None:
                         self.__init__(self.size, self.x, self.y)
@@ -69,13 +69,13 @@ class Square(Rectangle):
     def to_dictionary(self):
         """returns the Square dictionary representation"""
         return {
-                "id": self.id,
-                "size": self.width,
-                "x": self.x,
-                "y": self.y
-                }
+            "id": self.id,
+            "size": self.width,
+            "x": self.x,
+            "y": self.y
+        }
 
-        def __str__(self):
-            """returns the Square "print()" and "str()" representation"""
+    def __str__(self):
+        """returns the Square "print()" and "str()" representation"""
         return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y,
                                                  self.width)
