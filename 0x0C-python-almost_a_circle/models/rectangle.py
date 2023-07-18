@@ -11,8 +11,8 @@ class Rectangle(Base):
         arguments:
             width (int): new Rectangle width
             height (int): new Rectangle height
-            x (int): x coordinate of the new Rectangle 
-            y (int): y coordinate of the new Rectangle 
+            x (int): x coordinate of the new Rectangle
+            y (int): y coordinate of the new Rectangle
             id (int): new Rectangle id
         Raises:
             TypeError: If either of width or height is not an int.
@@ -152,5 +152,5 @@ class Rectangle(Base):
         def __str__(self):
             """returns the Rectangle "print()" and "str()" representation"""
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id,
-                self.x, self.y,
-                self.width, self.height)
+                                                       self.x, self.y,
+                                                       self.width, self.height)
